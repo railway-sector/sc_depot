@@ -487,6 +487,22 @@ const renderer = new UniqueValueRenderer({
   ],
 });
 
+const rendererNotMonitoring = new SimpleRenderer({
+  symbol: new MeshSymbol3D({
+    symbolLayers: [
+      new FillSymbol3DLayer({
+        material: {
+          color: [255, 255, 155, 0.3],
+          colorMixMode: "replace",
+        },
+        edges: new SolidEdges3D({
+          color: [255, 255, 155, 0.3],
+        }),
+      }),
+    ],
+  }),
+});
+
 // Discipline: Architectural
 export let columnsLayer: null | any;
 export let floorsLayer: null | any;
@@ -559,22 +575,25 @@ buildingLayer.when(() => {
       case "GenericModel":
         genericModelLayer = layer;
         genericModelLayer.popupTemplate = popuTemplate;
-        genericModelLayer.title = "Generic Model";
-        genericModelLayer.renderer = renderer;
+        genericModelLayer.title = "Generic Model (Not Monitoring)";
+        genericModelLayer.visible = false;
+        genericModelLayer.renderer = rendererNotMonitoring;
         break;
 
       case "Furniture":
         furnitureLayer = layer;
         furnitureLayer.popupTemplate = popuTemplate;
-        furnitureLayer.title = "Furniture";
-        furnitureLayer.renderer = renderer;
+        furnitureLayer.title = "Furniture (Not Monitoring)";
+        furnitureLayer.visible = false;
+        furnitureLayer.renderer = rendererNotMonitoring;
         break;
 
       case "Doors":
         doorsLayer = layer;
         doorsLayer.popupTemplate = popuTemplate;
-        doorsLayer.title = "Doors";
-        doorsLayer.renderer = renderer;
+        doorsLayer.title = "Doors (Not Monitoring)";
+        doorsLayer.visible = false;
+        doorsLayer.renderer = rendererNotMonitoring;
         break;
 
       case "Columns":
@@ -596,15 +615,17 @@ buildingLayer.when(() => {
       case "Stairs":
         stairsLayer = layer;
         stairsLayer.popupTemplate = popuTemplate;
-        stairsLayer.title = "Stairs";
-        stairsLayer.renderer = renderer;
+        stairsLayer.title = "Stairs (Not Monitoring)";
+        stairsLayer.visible = false;
+        stairsLayer.renderer = rendererNotMonitoring;
         break;
 
       case "Roofs":
         roofsLayer = layer;
         roofsLayer.popupTemplate = popuTemplate;
-        roofsLayer.title = "Roofs";
-        roofsLayer.renderer = renderer;
+        roofsLayer.title = "Roofs (Not Monitoring)";
+        roofsLayer.visible = false;
+        roofsLayer.renderer = rendererNotMonitoring;
         break;
 
       case "Walls":
@@ -617,8 +638,9 @@ buildingLayer.when(() => {
       case "Windows":
         windowsLayer = layer;
         windowsLayer.popupTemplate = popuTemplate;
-        windowsLayer.title = "Windows";
-        windowsLayer.renderer = renderer;
+        windowsLayer.title = "Windows (Not Monitoring)";
+        windowsLayer.visible = false;
+        windowsLayer.renderer = rendererNotMonitoring;
         break;
 
       case "StructuralFraming":
@@ -751,22 +773,6 @@ export const popupTemplate_cw = {
 };
 
 export let exteriorShellLayer_cw: null | any;
-
-const rendererNotMonitoring = new SimpleRenderer({
-  symbol: new MeshSymbol3D({
-    symbolLayers: [
-      new FillSymbol3DLayer({
-        material: {
-          color: [255, 255, 155, 0.3],
-          colorMixMode: "replace",
-        },
-        edges: new SolidEdges3D({
-          color: [255, 255, 155, 0.3],
-        }),
-      }),
-    ],
-  }),
-});
 
 buildingLayer_cw.when(() => {
   buildingLayer_cw.allSublayers.forEach((layer: any) => {

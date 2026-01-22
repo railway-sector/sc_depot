@@ -1,5 +1,4 @@
 import { useEffect, useRef, useState, use } from "react";
-import { genericModelLayer, exteriorShellLayer } from "../layers";
 import * as am5 from "@amcharts/amcharts5";
 import * as am5xy from "@amcharts/amcharts5/xy";
 import am5themes_Animated from "@amcharts/amcharts5/themes/Animated";
@@ -76,9 +75,6 @@ const BuildingChart = () => {
   const chartBorderLineWidth = 0.4;
 
   useEffect(() => {
-    genericModelLayer.visible = false;
-    exteriorShellLayer.visible = false;
-
     maybeDisposeRoot(chartID);
 
     const root = am5.Root.new(chartID);

@@ -144,7 +144,7 @@ function ActionPanel() {
           height="l"
           width="l"
           data-panel-id="layers"
-          style={{ width: "18vw" }}
+          style={{ width: "20vw" }}
           hidden
         >
           <arcgis-layer-list
