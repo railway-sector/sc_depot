@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
+/* eslint-disable @typescript-eslint/no-unused-expressions */
 import { useEffect, useRef, useState, use } from "react";
 import * as am5 from "@amcharts/amcharts5";
 import * as am5xy from "@amcharts/amcharts5/xy";
@@ -6,6 +8,7 @@ import am5themes_Responsive from "@amcharts/amcharts5/themes/Responsive";
 import "../App.css";
 import {
   buildingSpotZoom,
+  buildingType,
   generateChartData,
   generateTotalProgress,
   thousands_separators,
@@ -14,6 +17,8 @@ import "@esri/calcite-components/dist/components/calcite-label";
 import { CalciteLabel } from "@esri/calcite-components-react";
 import { ArcgisScene } from "@arcgis/map-components/dist/components/arcgis-scene";
 import { MyContext } from "../contexts/MyContext";
+import { buildingLayer } from "../layers";
+import FeatureFilter from "@arcgis/core/layers/support/FeatureFilter";
 
 // Dispose function
 function maybeDisposeRoot(divId: any) {
@@ -227,6 +232,49 @@ const BuildingChart = () => {
             centerX: am5.p50,
             populateText: true,
           }),
+        });
+      });
+      let highlightedSublayerView: any;
+      series.columns.template.events.on("click", (ev) => {
+        const selected: any = ev.target.dataItem?.dataContext;
+        const categorySelect: string = selected.category;
+        // const typeSelect = buildingType.find(
+        //   (emp: any) => emp.category === categorySelect,
+        // )?.value;
+
+        // const buildingExpression = "Name = '" + buildings + "'";
+        // const typeExpression = "Type = " + typeSelect;
+        // const expression = !buildings
+        //   ? typeExpression
+        //   : buildingExpression + " AND " + typeExpression;
+
+        // Find sublayer
+        const selectedSublayerName = buildingType.find(
+          (emp: any) => emp.category === categorySelect,
+        );
+
+        arcgisScene?.view.whenLayerView(buildingLayer).then((bslv: any) => {
+          const sublayerView = bslv.sublayerViews.find((sublayerView: any) => {
+            return (
+              sublayerView.sublayer.modelName ===
+              selectedSublayerName?.modelName
+            );
+          });
+
+          highlightedSublayerView && highlightedSublayerView.remove();
+
+          // Highlight selected features
+          const query = sublayerView.createQuery();
+          // highlightedSublayerView && highlightedSublayerView.remove();
+          sublayerView.queryObjectIds(query).then((result: any) => {
+            highlightedSublayerView = sublayerView.highlight(result);
+          });
+          arcgisScene?.view.on("click", function () {
+            sublayerView.filter = new FeatureFilter({
+              where: undefined,
+            });
+            highlightedSublayerView.remove();
+          });
         });
       });
 
