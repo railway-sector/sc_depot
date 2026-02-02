@@ -13,8 +13,6 @@ import {
   generateTotalProgress,
   thousands_separators,
 } from "../Query";
-import "@esri/calcite-components/dist/components/calcite-label";
-import { CalciteLabel } from "@esri/calcite-components-react";
 import { ArcgisScene } from "@arcgis/map-components/dist/components/arcgis-scene";
 import { MyContext } from "../contexts/MyContext";
 import { buildingLayer } from "../layers";
@@ -261,11 +259,8 @@ const BuildingChart = () => {
             );
           });
 
-          highlightedSublayerView && highlightedSublayerView.remove();
-
           // Highlight selected features
           const query = sublayerView.createQuery();
-          // highlightedSublayerView && highlightedSublayerView.remove();
           sublayerView.queryObjectIds(query).then((result: any) => {
             highlightedSublayerView = sublayerView.highlight(result);
           });
@@ -374,50 +369,57 @@ const BuildingChart = () => {
   const valueLabelColor = "#d1d5db";
 
   return (
-    <div>
+    <>
       <div
         style={{
-          color: primaryLabelColor,
-          fontSize: "1.3rem",
-          marginLeft: "13px",
-          marginTop: "10px",
-          marginBottom: "-5px",
+          display: "flex",
+          marginTop: "3px",
+          marginLeft: "15px",
+          marginRight: "15px",
+          justifyContent: "space-between",
+          marginBottom: "10px",
         }}
       >
-        Total Progress
-      </div>
-      <CalciteLabel layout="inline">
-        <div
-          style={{
-            color: valueLabelColor,
-            fontSize: "2.7rem",
-            fontWeight: "bold",
-            fontFamily: "calibri",
-            lineHeight: "1.2",
-            marginLeft: "30px",
-          }}
-        >
-          {progress[2]} %
-        </div>
-
         <img
-          src="https://EijiGorilla.github.io/Symbols/Station_Structures_icon.png"
-          alt="Utility Logo"
-          height={"55px"}
-          width={"55px"}
-          style={{ marginLeft: "35%", display: "flex", marginTop: "-40px" }}
+          src="https://EijiGorilla.github.io/Symbols/Station_Structures_icon.svg"
+          alt="Station Structure Logo"
+          height={"60px"}
+          width={"60px"}
+          style={{ paddingTop: "20px", paddingLeft: "10px" }}
         />
-      </CalciteLabel>
-      <div
-        style={{
-          color: valueLabelColor,
-          fontSize: "1rem",
-          fontFamily: "calibri",
-          lineHeight: "1.2",
-          marginLeft: "45px",
-        }}
-      >
-        ({thousands_separators(progress[0])})
+        <dl style={{ alignItems: "center" }}>
+          <dt
+            style={{
+              color: primaryLabelColor,
+              fontSize: "1.2rem",
+              marginRight: "20px",
+            }}
+          >
+            TOTAL PROGRESS
+          </dt>
+          <dd
+            style={{
+              color: valueLabelColor,
+              fontSize: "1.9rem",
+              fontWeight: "bold",
+              fontFamily: "calibri",
+              lineHeight: "1.2",
+              margin: "auto",
+            }}
+          >
+            {progress[2]} %
+          </dd>
+          <div
+            style={{
+              color: valueLabelColor,
+              fontSize: "1rem",
+              fontFamily: "calibri",
+              lineHeight: "1.2",
+            }}
+          >
+            ({thousands_separators(progress[0])})
+          </div>
+        </dl>
       </div>
 
       <div
@@ -442,7 +444,7 @@ const BuildingChart = () => {
           Reset Chart Filter
         </CalciteButton>
       </div> */}
-    </div>
+    </>
   );
 };
 

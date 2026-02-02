@@ -17,7 +17,6 @@ import {
   layerVisibleTrue_cw,
   thousands_separators,
 } from "../Query";
-import { CalciteLabel } from "@esri/calcite-components-react";
 
 // Dispose function
 function maybeDisposeRoot(divId: any) {
@@ -265,63 +264,70 @@ const CivilWorkChart = () => {
   const valueLabelColor = "#d1d5db";
 
   return (
-    <div>
+    <>
       <div
         style={{
-          color: primaryLabelColor,
-          fontSize: "1.3rem",
-          marginLeft: "13px",
-          marginTop: "10px",
-          marginBottom: "-5px",
+          display: "flex",
+          marginTop: "3px",
+          marginLeft: "15px",
+          marginRight: "15px",
+          justifyContent: "space-between",
+          marginBottom: "10px",
         }}
       >
-        Total Progress
-      </div>
-      <CalciteLabel layout="inline">
-        <div
-          style={{
-            color: valueLabelColor,
-            fontSize: "2.7rem",
-            fontWeight: "bold",
-            fontFamily: "calibri",
-            lineHeight: "1.2",
-            marginLeft: "30px",
-          }}
-        >
-          {progress} %
-        </div>
-
         <img
-          src="https://EijiGorilla.github.io/Symbols/Station_Structures_icon.png"
-          alt="Utility Logo"
-          height={"55px"}
-          width={"55px"}
-          style={{ marginLeft: "45%", display: "flex", marginTop: "-30px" }}
+          src="https://EijiGorilla.github.io/Symbols/Station_Structures_icon.svg"
+          alt="Station Structure Logo"
+          height={"60px"}
+          width={"60px"}
+          style={{ paddingTop: "20px", paddingLeft: "10px" }}
         />
-      </CalciteLabel>
-      <div
-        style={{
-          color: valueLabelColor,
-          fontSize: "1rem",
-          fontFamily: "calibri",
-          lineHeight: "1.2",
-          marginLeft: "45px",
-        }}
-      >
-        ({thousands_separators(totalNumber)})
+        <dl style={{ alignItems: "center" }}>
+          <dt
+            style={{
+              color: primaryLabelColor,
+              fontSize: "1.2rem",
+              marginRight: "20px",
+            }}
+          >
+            TOTAL PROGRESS
+          </dt>
+          <dd
+            style={{
+              color: valueLabelColor,
+              fontSize: "1.9rem",
+              fontWeight: "bold",
+              fontFamily: "calibri",
+              lineHeight: "1.2",
+              margin: "auto",
+            }}
+          >
+            {progress} %
+          </dd>
+          <div
+            style={{
+              color: valueLabelColor,
+              fontSize: "1rem",
+              fontFamily: "calibri",
+              lineHeight: "1.2",
+            }}
+          >
+            ({thousands_separators(totalNumber)})
+          </div>
+        </dl>
       </div>
 
       <div
         id={chartID_cw}
         style={{
           width: "24vw",
-          height: "60vh",
+          height: "64vh",
           backgroundColor: "rgb(0,0,0,0)",
           color: "white",
           marginRight: "10px",
         }}
       ></div>
-    </div>
+    </>
   );
 };
 
