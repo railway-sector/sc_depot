@@ -503,7 +503,13 @@ export async function defineActions(event: any) {
   item.title === "Depot Civil Works" ||
   item.title === "Architectural (reference only)" ||
   item.title === "Land & Structure" ||
-  item.title === "ExteriorShell"
+  item.title === "ExteriorShell" ||
+  item.title === "Generic Model (Not Monitoring)" ||
+  item.title === "Furniture (Not Monitoring)" ||
+  item.title === "Doors (Not Monitoring)" ||
+  item.title === "Stairs (Not Monitoring)" ||
+  item.title === "Roofs (Not Monitoring)" ||
+  item.title === "Windows (Not Monitoring)"
     ? (item.visible = false)
     : (item.visible = true);
 }

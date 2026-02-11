@@ -570,6 +570,7 @@ buildingLayer.when(() => {
 
       case "Overview":
         exteriorShellLayer = layer;
+        exteriorShellLayer.title = "ExteriorShell";
         break;
 
       case "GenericModel":
